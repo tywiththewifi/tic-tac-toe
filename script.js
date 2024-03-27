@@ -3,12 +3,11 @@ const startBtn = document.querySelector('.start-btn');
 const player1 = document.querySelector('#player1');
 const player2 = document.querySelector('#player2');
 const gameState = document.querySelector('.game-state');
+const grid = document.querySelector('.grid');
+
 resetBtn.style.display = 'none';
 
-// make it so start button doesnt work until player1 and 2 have been filled out
-// reset button doesnt work until checkWin of checkDraw is true
-// player1 and 2 values are stored in variables and used to say who's turn it is
-
+// need to get the gameState to show winner and draw messages
 const gameBoard = (() => {
     let board = [
         [null, null, null], 
@@ -17,15 +16,25 @@ const gameBoard = (() => {
 
     let currentPlayer = 'X';
 
-    const updateGameStateDisplay = () => {
+    const updateGameStateDisplay = (message = null) => {
+        let displayMessage = message;
+
+        if (!displayMessage) {
         const playerName = currentPlayer === 'X' ? player1.value : player2.value;
-        gameState.textContent = `It's your turn, ${playerName}`;
+        displayMessage = `It's your turn, ${playerName}`;
+
+        }
+
+        gameState.textContent = displayMessage;
+
         console.log('game state updated');
+
     }
 
     const reset = () => {
         board = board.map(row => row.map(() => null));
         currentPlayer = 'X';
+        updateGameStateDisplay();
     };
 
     const makeMove = (row, col) => {
@@ -33,13 +42,15 @@ const gameBoard = (() => {
             board[row][col] = currentPlayer;
         
             if (checkWin()) {
+                const winnerName = currentPlayer === 'X' ? player1.value : player2.value;
+                updateGameStateDisplay(`${winnerName} is the winner!`);
                 console.log(`${currentPlayer} is the winner!`);
                 return 'win';
             } else if (checkDraw()) {
+                updateGameStateDisplay(`It's a draw!`);
                 console.log(`It's a draw!`);
                 return 'draw';
             } 
-
             return true;
 
         }
@@ -95,15 +106,16 @@ const gameBoard = (() => {
     }
 
     const togglePlayer = () => {
+        if (!checkWin() && !checkDraw()) {
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         updateGameStateDisplay();
+
+        }
     }
 
     return { reset, makeMove, printBoard, checkWin, checkDraw, getCurrentPlayer, togglePlayer, updateGameStateDisplay };
 
 })();
-
-const grid = document.querySelector('.grid');
 
 const renderGame = () => {
 
@@ -133,7 +145,7 @@ const renderGame = () => {
 
                 }
 
-            });
+            }, { once: true });
         };
 
     grid.appendChild(row);  
@@ -173,6 +185,7 @@ startBtn.addEventListener('click', () => {
 resetBtn.addEventListener('click', () => {
     clearBoard();
     gameBoard.reset();
+    renderGame();
     console.log('game has been reset');
 });
 
