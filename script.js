@@ -5,9 +5,12 @@ const player2 = document.querySelector('#player2');
 const gameState = document.querySelector('.game-state');
 const grid = document.querySelector('.grid');
 
+const scoreBoard = document.querySelector('.score-wrap')
+const p1Score = document.getElementById('p1-score');
+const p2Score = document.getElementById('p2-score');
+
 resetBtn.style.display = 'none';
 
-// need to get the gameState to show winner and draw messages
 const gameBoard = (() => {
     let board = [
         [null, null, null], 
@@ -15,6 +18,22 @@ const gameBoard = (() => {
         [null, null, null]];
 
     let currentPlayer = 'X';
+
+    let playerScores = {
+        'X': 0,
+        'O': 0
+    }
+    const updateScore = () => {
+        
+        if (checkWin()) {
+            playerScores[currentPlayer] += 1;
+
+            p1Score.textContent = playerScores['X'];
+            p2Score.textContent = playerScores['O'];
+        }
+
+    
+    };
 
     const updateGameStateDisplay = (message = null) => {
         let displayMessage = message;
@@ -45,6 +64,7 @@ const gameBoard = (() => {
                 const winnerName = currentPlayer === 'X' ? player1.value : player2.value;
                 updateGameStateDisplay(`${winnerName} is the winner!`);
                 console.log(`${currentPlayer} is the winner!`);
+                updateScore();
                 return 'win';
             } else if (checkDraw()) {
                 updateGameStateDisplay(`It's a draw!`);
@@ -173,6 +193,8 @@ startBtn.addEventListener('click', () => {
     player1.style.display = 'none';
     player2.style.display = 'none';
     startBtn.style.display = 'none';
+    scoreBoard.style.display = 'flex';
+
 
     resetBtn.style.display = 'block';
     gameBoard.updateGameStateDisplay();
@@ -195,6 +217,3 @@ const player = (name, symbol, score) => {
         name, symbol, score
         }
 };
-
-
-

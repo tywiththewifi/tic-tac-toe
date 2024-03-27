@@ -18,18 +18,21 @@ body {
     border: none;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
+    gap: 4px;
 }
 
 .row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     flex-grow: 1;
+    gap: 4px;
 }
 
 .gridSquare {
     display: flex;
     padding: 0.5rem 0;
     border: 1px solid transparent;
+    background-color: grey;
     flex-grow: 1;
     justify-content: center;
     align-items: center;
@@ -45,25 +48,13 @@ body {
     background-color: #e8e9ea;
 }
 
-.top-border {
-    border-bottom: 1px solid black;
-}
-.bottom-border {
-    border-top: 1px solid black;
-}
-.left-border {
-    border-right: 1px solid black;
-}
-.right-border {
-    border-left: 1px solid black;
-}
-
 .title {
     display: flex;
     justify-content: center;
-    margin: 125px 0px 32px 0px;
+    margin: 75px 0px 16px 0px;
     padding: 0px;
     font-size: 1.5rem;
+    text-decoration: underline;
 }
 
 .reset-btn, .start-btn {
@@ -106,3 +97,78 @@ body {
     height: 1rem;
     font-size: 1.2rem;
 }
+
+/* css styling for scoreboard */
+
+.score-wrap {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    max-height: 5rem;
+    border-radius: 8px;
+    background-color: #e8e9ea;
+}
+
+.home, .guest {
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: left; */
+    gap: 10px;
+    align-items: center;
+}
+
+h3 {
+    color: black;
+    text-align: center;
+    font-family: inherit;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 35.893px; 
+    padding: 0px;
+    margin: 0px;
+}
+
+#p1-score, #p2-score {
+    color: grey;
+    text-align: center;
+    font-family: inherit;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: 126.666px; */
+    padding: 0px;
+    margin: 0px;
+}
+
+.scoreboard-guest, .scoreboard-home {
+    /* background-color: black; */
+    margin: 0px;
+    /* max-width: 155px;
+    max-height: 120px; */
+    border-radius: 6px;
+
+}
+
+.scoreName-player {
+    color: black;
+    font-size: 1rem;
+}
+
+button {
+    /* background-color: #1B244A; */
+    border-radius: 5px;
+    border: 2px solid #9AABD8;
+    width: 45px;
+    /* color: #9AABD8; */
+    font-family: "Cursed Timer ULiL";
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27.812px;
+}
+
+
+
