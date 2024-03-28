@@ -11,6 +11,8 @@ body {
     gap: 16px;
 }
 
+/* Game Board Stylings */
+
 .grid {
     width: 300px;
     height: 300px;
@@ -98,7 +100,7 @@ body {
     font-size: 1.2rem;
 }
 
-/* css styling for scoreboard */
+/* Score Board Stylings */
 
 .score-wrap {
     display: none;
@@ -111,10 +113,8 @@ body {
     background-color: #e8e9ea;
 }
 
-.home, .guest {
+.p1-score-wrap, .p2-score-wrap {
     display: flex;
-    /* flex-direction: column; */
-    /* justify-content: left; */
     gap: 10px;
     align-items: center;
 }
@@ -138,16 +138,12 @@ h3 {
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
-    /* line-height: 126.666px; */
     padding: 0px;
     margin: 0px;
 }
 
-.scoreboard-guest, .scoreboard-home {
-    /* background-color: black; */
+.scoreboard-p2, .scoreboard-p1 {
     margin: 0px;
-    /* max-width: 155px;
-    max-height: 120px; */
     border-radius: 6px;
 
 }
@@ -157,18 +153,6 @@ h3 {
     font-size: 1rem;
 }
 
-button {
-    /* background-color: #1B244A; */
-    border-radius: 5px;
-    border: 2px solid #9AABD8;
-    width: 45px;
-    /* color: #9AABD8; */
-    font-family: "Cursed Timer ULiL";
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 27.812px;
-}
 
 
 

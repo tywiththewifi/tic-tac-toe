@@ -1,3 +1,4 @@
+// DOM Elements
 const resetBtn = document.querySelector('.reset-btn');
 const startBtn = document.querySelector('.start-btn');
 const player1 = document.querySelector('#player1');
@@ -9,8 +10,10 @@ const scoreBoard = document.querySelector('.score-wrap')
 const p1Score = document.getElementById('p1-score');
 const p2Score = document.getElementById('p2-score');
 
+// Initial UI State
 resetBtn.style.display = 'none';
 
+// Game Board Module
 const gameBoard = (() => {
     let board = [
         [null, null, null], 
@@ -23,6 +26,8 @@ const gameBoard = (() => {
         'X': 0,
         'O': 0
     }
+
+    // Function to update score
     const updateScore = () => {
         
         if (checkWin()) {
@@ -32,9 +37,9 @@ const gameBoard = (() => {
             p2Score.textContent = playerScores['O'];
         }
 
-    
     };
 
+    // Function to update game state display
     const updateGameStateDisplay = (message = null) => {
         let displayMessage = message;
 
@@ -50,6 +55,7 @@ const gameBoard = (() => {
 
     }
 
+    // Game control functions
     const reset = () => {
         board = board.map(row => row.map(() => null));
         currentPlayer = 'X';
@@ -79,12 +85,7 @@ const gameBoard = (() => {
 
     }
 
-    const getCurrentPlayer = () => currentPlayer;
-
-    const printBoard = () => {
-        console.log(board.map(row => row.join(' | ')).join('\n'))
-    }
-
+    // Win condition checks
     const checkWin = () => {
 
         for (let row = 0; row < 3; row++) {
@@ -111,6 +112,7 @@ const gameBoard = (() => {
 
     };
 
+    // Draw condition check
     const checkDraw = () => {
         if (checkWin()) {
             return false;
@@ -125,6 +127,8 @@ const gameBoard = (() => {
         return true;
     }
 
+    const getCurrentPlayer = () => currentPlayer;
+
     const togglePlayer = () => {
         if (!checkWin() && !checkDraw()) {
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -133,10 +137,12 @@ const gameBoard = (() => {
         }
     }
 
-    return { reset, makeMove, printBoard, checkWin, checkDraw, getCurrentPlayer, togglePlayer, updateGameStateDisplay };
+    // Expose public methods
+    return { reset, makeMove, checkWin, checkDraw, getCurrentPlayer, togglePlayer, updateGameStateDisplay };
 
 })();
 
+// Renders game UI
 const renderGame = () => {
 
     grid.innerHTML = '';
@@ -176,8 +182,7 @@ const renderGame = () => {
 
 }
 
-
-
+// Clear board logic
 const clearBoard = () => {
     const sqaures = document.querySelectorAll('.gridSquare');
     sqaures.forEach(square => {
@@ -185,6 +190,8 @@ const clearBoard = () => {
     })
 };
 
+
+// Event listeners
 startBtn.addEventListener('click', () => {
     if (player1.value !== '' && player2.value !== '') {
     renderGame();
@@ -211,9 +218,3 @@ resetBtn.addEventListener('click', () => {
     console.log('game has been reset');
 });
 
-const player = (name, symbol, score) => {
-
-    return {
-        name, symbol, score
-        }
-};
